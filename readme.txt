@@ -47,4 +47,4 @@ bxSlider is licensed under the MIT license
 Source: http://bxslider.com/
 
 Used images in screenshot.png, licensed under CC0 Public Domain, free for commercial use / no attribution required
-https://www.pexels.com/photo/flight-mountains-sky-flying-6675/
+https://pixabay.com/en/working-business-women-female-work-1219889/
