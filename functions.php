@@ -546,7 +546,9 @@ function cerium_scripts() {
 
 	wp_enqueue_script( 'jquery-ui-tabs' );
 
-	wp_enqueue_script('googlemap', '//maps.googleapis.com/maps/api/js?sensor=false', array(), '3', false);
+	if ( get_theme_mod('cerium_gmap_key', '') ) {
+		wp_enqueue_script('googlemap', '//maps.googleapis.com/maps/api/js?sensor=false&key='.get_theme_mod('cerium_gmap_key', ''), array(), '3', false);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'cerium_scripts' );
 

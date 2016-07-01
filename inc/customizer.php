@@ -287,6 +287,26 @@ function cerium_customize_register( $wp_customize ) {
 		)
 	);
 
+	// Google maps key
+	$wp_customize->add_section( 'cerium_google_maps_key', array(
+		'priority'       => 20,
+		'capability'     => 'edit_theme_options',
+		'title'          => __( 'Google maps key' , 'cerium'),
+		'description'    => __( 'Google maps API key so theme can use Google maps API.' , 'cerium'),
+		'panel'          => 'cerium_header_panel'
+	) );
+
+	$wp_customize->add_setting( 'cerium_gmap_key', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+
+	$wp_customize->add_control(
+		'cerium_gmap_key',
+		array(
+			'label'      => 'Google maps key',
+			'section'    => 'cerium_google_maps_key',
+			'type'       => 'text',
+		)
+	);
+
 	// Social links
 	$wp_customize->add_section( new cerium_Customized_Section( $wp_customize, 'cerium_social_links', array(
 		'priority'       => 300,
