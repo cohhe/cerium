@@ -22,7 +22,7 @@ global $cerium_site_width, $cerium_layout_type;
 	<?php if ( $cerium_layout_type == 'left' ) {
 		get_sidebar( 'post' );
 	} ?>
-	<div id="primary" class="content-area <?php echo $cerium_site_width; ?>">
+	<div id="primary" class="content-area <?php echo esc_attr($cerium_site_width); ?>">
 		<div id="content" class="site-content" role="main">
 			<?php
 				// Start the Loop.

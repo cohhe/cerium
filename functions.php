@@ -91,8 +91,8 @@ if ( ! function_exists( 'cerium_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in two locations.
 		register_nav_menus( array(
-			'primary'   => __( 'Top primary menu', 'cerium' ),
-			'footer'    => __( 'Footer menu', 'cerium' ),
+			'primary'   => esc_html__( 'Top primary menu', 'cerium' ),
+			'footer'    => esc_html__( 'Footer menu', 'cerium' ),
 		) );
 
 		/*
@@ -118,6 +118,8 @@ if ( ! function_exists( 'cerium_setup' ) ) :
 
 		// This theme uses its own gallery styles.
 		add_filter( 'use_default_gallery_style', '__return_false' );
+
+		add_theme_support( 'title-tag' );
 	}
 endif; // cerium_setup
 add_action( 'after_setup_theme', 'cerium_setup' );
@@ -132,54 +134,14 @@ function cerium_is_blog() {
 	return get_option('page_for_posts');
 }
 
-function cerium_get_social_icons() {
-	$facebook = get_theme_mod('cerium_headerfacebook', '');
-	$youtube = get_theme_mod('cerium_headeryoutube', '');
-	$twitter = get_theme_mod('cerium_headertwitter', '');
-	$gplus = get_theme_mod('cerium_headergplus', '');
-	$output = '';
-	$count = 1;
-	$class = 'count-';
-
-	if ( $facebook != '' || $youtube != '' || $twitter != '' || $gplus != '' ) {
-		$output .= '
-		<div class="header-share-icons">
-			<a href="javascript:void(0)" class="header-share icon-share"></a>
-			<div class="header-icon-wrapper">';
-				if ( $facebook != '' ) {
-					$output .= '<a href="' . $facebook . '" class="header-social ' . $class . $count . ' icon-facebook"></a>';
-					$count++;
-				}
-
-				if ( $youtube != '' ) {
-					$output .= '<a href="' . $youtube . '" class="header-social ' . $class . $count . ' icon-youtube-play"></a>';
-					$count++;
-				}
-
-				if ( $twitter != '' ) {
-					$output .= '<a href="' . $twitter . '" class="header-social ' . $class . $count . ' icon-twitter"></a>';
-					$count++;
-				}
-
-				if ( $gplus != '' ) {
-					$output .= '<a href="' . $gplus . '" class="header-social ' . $class . $count . ' icon-gplus"></a>';
-					$count++;
-				}
-			
-		$output .= '<div class="clearfix"></div></div></div>';
-	}
-
-	return $output;
-}
-
 function cerium_tag_list() {
 	$tags_list = get_the_tag_list( '', '' );
 	$entry_utility = '';
 	if ( $tags_list ) {
 		$entry_utility .= '
 		<div class="tag-link">
-		<span class="tag-title">'.__('Tags', 'cerium').'</span>
-		' . sprintf( __( '<span class="%1$s"></span> %2$s', 'cerium' ), 'entry-utility-prep entry-utility-prep-tag-links', $tags_list );
+		<span class="tag-title">'.esc_html__('Tags', 'cerium').'</span>
+		' . sprintf( esc_html__( '<span class="%1$s"></span> %2$s', 'cerium' ), 'entry-utility-prep entry-utility-prep-tag-links', $tags_list );
 		$entry_utility .= '
 		</div>';
 	}
@@ -194,25 +156,12 @@ function cerium_category_list() {
 		$entry_utility .= '
 		<div class="category-link">
 		<i class="entypo_icon icon-folder-open"></i>
-		' . sprintf( __( '<span class="%1$s"></span> %2$s', 'cerium' ), 'entry-utility-prep entry-utility-prep-category-links', $tags_list );
+		' . sprintf( esc_html__( '<span class="%1$s"></span> %2$s', 'cerium' ), 'entry-utility-prep entry-utility-prep-category-links', $tags_list );
 		$entry_utility .= '
 		</div>';
 	}
 
 	echo $entry_utility;
-}
-
-function cerium_share_icons() {
-	$output = '<div class="single-open-post-share">';
-	$output .= '<a href="http://www.facebook.com/sharer.php?u=' . get_permalink() . '" class="social-icon icon-facebook" target="_blank"></a>';
-	$output .= '<a href="http://twitter.com/share?url=' . get_permalink() . '&amp;text=' . urlencode( get_the_title() ) . '" class="social-icon icon-twitter" target="_blank"></a>';
-	$output .= '<a href="https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode( get_the_permalink() ) . '&title=' . urlencode( get_the_title() ) . '" class="single-share-linkedin icon-linkedin"></a>';
-	$output .= '<a href="http://tumblr.com/widgets/share/tool?canonicalUrl=' . urlencode( get_the_permalink() ) . '" class="single-share-tumblr icon-tumblr"></a>';
-	$output .= '<a href="https://plus.google.com/share?url=' . get_permalink() . '" class="social-icon icon-gplus" target="_blank"></a>';
-	$output .= "<a href=\"javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','//assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());\" class=\"social-icon icon-pinterest\" target=\"_blank\"></a>";
-	$output .= '</div>';
-
-	echo $output;
 }
 
 function cerium_prev_next_links() {
@@ -223,7 +172,7 @@ function cerium_prev_next_links() {
 		if (!empty( $prev_post )) {
 			$output .= '
 			<div class="nav_button left">
-				<h3 class="prev-post-text">'. __('Previous post', 'cerium').'</h3>
+				<h3 class="prev-post-text">'. esc_html__('Previous post', 'cerium').'</h3>
 				<div class="prev-post-link">
 					<a href="'. get_permalink( $prev_post->ID ).'" class="prev_blog_post icon-left">'.get_the_title( $prev_post->ID ).'</a>
 				</div>
@@ -233,7 +182,7 @@ function cerium_prev_next_links() {
 		if (!empty( $next_post )) {
 			$output .= '
 			<div class="nav_button right">
-				<h3 class="next-post-text">'.__('Next post', 'cerium').'</h3>
+				<h3 class="next-post-text">'.esc_html__('Next post', 'cerium').'</h3>
 				<div class="next-post-link">
 					<a href="'. get_permalink( $next_post->ID ).'" class="next_blog_post icon-right">'. get_the_title( $next_post->ID ).'</a>
 				</div>
@@ -316,47 +265,47 @@ function cerium_has_featured_posts() {
  */
 function cerium_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Post Sidebar', 'cerium' ),
+		'name'          => esc_html__( 'Post Sidebar', 'cerium' ),
 		'id'            => 'cerium-sidebar-1',
 		'class'			=> 'col-sm-4 col-md-4 col-lg-4',
-		'description'   => __( 'Additional sidebar that appears on the right or left.', 'cerium' ),
+		'description'   => esc_html__( 'Additional sidebar that appears on the right or left.', 'cerium' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
 	register_sidebar( array(
-		'name'          => __( 'Content Sidebar', 'cerium' ),
+		'name'          => esc_html__( 'Content Sidebar', 'cerium' ),
 		'id'            => 'cerium-sidebar-2',
 		'class'			=> 'col-sm-4 col-md-4 col-lg-4',
-		'description'   => __( 'Additional sidebar that appears on the right or left.', 'cerium' ),
+		'description'   => esc_html__( 'Additional sidebar that appears on the right or left.', 'cerium' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
 	register_sidebar( array(
-		'name'          => __( 'Footer Widget Area 1', 'cerium' ),
+		'name'          => esc_html__( 'Footer Widget Area 1', 'cerium' ),
 		'id'            => 'cerium-sidebar-3',
-		'description'   => __( 'Appears in the footer section of the site.', 'cerium' ),
+		'description'   => esc_html__( 'Appears in the footer section of the site.', 'cerium' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
 	register_sidebar( array(
-		'name'          => __( 'Footer Widget Area 2', 'cerium' ),
+		'name'          => esc_html__( 'Footer Widget Area 2', 'cerium' ),
 		'id'            => 'cerium-sidebar-4',
-		'description'   => __( 'Appears in the footer section of the site.', 'cerium' ),
+		'description'   => esc_html__( 'Appears in the footer section of the site.', 'cerium' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
 	register_sidebar( array(
-		'name'          => __( 'Footer Widget Area 3', 'cerium' ),
+		'name'          => esc_html__( 'Footer Widget Area 3', 'cerium' ),
 		'id'            => 'cerium-sidebar-5',
-		'description'   => __( 'Appears in the footer section of the site.', 'cerium' ),
+		'description'   => esc_html__( 'Appears in the footer section of the site.', 'cerium' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title">',
@@ -407,7 +356,7 @@ add_filter( 'excerpt_length', 'cerium_excerpt_length', 999 );
 function cerium_breadcrumbs() {
 	$delimiter = get_option('vh_breadcrumb_delimiter') ? get_option('vh_breadcrumb_delimiter') : '<span class="delimiter">/</span>';
 
-	$home   = __('Home', 'cerium'); // text for the 'Home' link
+	$home   = esc_html__('Home', 'cerium'); // text for the 'Home' link
 	$before = '<span class="current">'; // tag before the current crumb
 	$after  = '</span>'; // tag after the current crumb
 
@@ -426,7 +375,7 @@ function cerium_breadcrumbs() {
 			$parentCat = get_category($thisCat->parent);
 			if ($thisCat->parent != 0)
 				$output .= get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' ');
-			$output .= $before . 'Archive by category "' . single_cat_title('', false) . '"' . $after;
+			$output .= $before . esc_html__('Archive by category', 'cerium').' "' . single_cat_title('', false) . '"' . $after;
 		} elseif (is_day()) {
 			$output .= '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
 			$output .= '<a href="' . get_month_link(get_the_time('Y'), get_the_time('m')) . '">' . get_the_time('F') . '</a> ' . $delimiter . ' ';
@@ -477,15 +426,15 @@ function cerium_breadcrumbs() {
 			}
 			$output .= $before . get_the_title() . $after;
 		} elseif (is_search()) {
-			$output .= $before . 'Search results for "' . get_search_query() . '"' . $after;
+			$output .= $before . esc_html__('Search results for', 'cerium').' "' . get_search_query() . '"' . $after;
 		} elseif (is_tag()) {
-			$output .= $before . 'Posts tagged "' . single_tag_title('', false) . '"' . $after;
+			$output .= $before . esc_html__('Posts tagged', 'cerium').' "' . single_tag_title('', false) . '"' . $after;
 		} elseif (is_author()) {
 			global $vh_author;
 			$userdata = get_userdata($vh_author);
-			$output .= $before . 'Articles posted by ' . get_the_author() . $after;
+			$output .= $before . esc_html__('Articles posted by', 'cerium').' ' . get_the_author() . $after;
 		} elseif (is_404()) {
-			$output .= $before . 'Error 404' . $after;
+			$output .= $before . esc_html__('Error 404', 'cerium') . $after;
 		}
 
 		if (get_query_var('paged')) {
@@ -704,7 +653,7 @@ function cerium_the_related_posts() {
 
 		$my_query = new wp_query( $args ); ?>
 
-		<h3 class="related-articles-title"><?php _e( 'Related posts', 'cerium' ); ?></h3>
+		<h3 class="related-articles-title"><?php esc_html_e( 'Related posts', 'cerium' ); ?></h3>
 		<div class="related-articles">
 			<?php
 			if ( $my_query->have_posts() ) {
@@ -728,7 +677,7 @@ function cerium_the_related_posts() {
 					</div>
 				<?php }
 			} else { ?>
-				<h3 class="no-related-posts"><?php _e('There\'s no related posts!', 'cerium'); ?></h3>
+				<h3 class="no-related-posts"><?php esc_html_e('There\'s no related posts!', 'cerium'); ?></h3>
 			<?php } ?>
 			<div class="clearfix"></div>
 		</div>
@@ -737,41 +686,6 @@ function cerium_the_related_posts() {
 	wp_reset_postdata();
 	wp_reset_query();
 }
-
-/**
- * Create a nicely formatted and more specific title element text for output
- * in head of document, based on current view.
- *
- * @since Cerium 1.0
- *
- * @param string $title Default title text for current view.
- * @param string $sep Optional separator.
- * @return string The filtered title.
- */
-function cerium_wp_title( $title, $sep ) {
-	global $paged, $page;
-
-	if ( is_feed() ) {
-		return $title;
-	}
-
-	// Add the site name.
-	$title .= get_bloginfo( 'name' );
-
-	// Add the site description for the home/front page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) ) {
-		$title = "$title $sep $site_description";
-	}
-
-	// Add a page number if necessary.
-	if ( $paged >= 2 || $page >= 2 ) {
-		$title = "$title $sep " . sprintf( __( 'Page %s', 'cerium' ), max( $paged, $page ) );
-	}
-
-	return $title;
-}
-add_filter( 'wp_title', 'cerium_wp_title', 10, 2 );
 
 // Custom template tags for this theme.
 require get_template_directory() . '/inc/template-tags.php';
@@ -906,16 +820,6 @@ class Cerium_Header_Menu_Walker extends Walker_Nav_Menu {
 	}
 }
 
-function get_depth($postid) {
-$depth = ($postid==get_option('page_on_front')) ? -1 : 0;
-while ($postid > 0) {
-$postid = get_post_ancestors($postid);
-$postid = $postid[0];
-$depth++;
-}
-return $depth;
-}
-
 /**
  * Register the required plugins for this theme.
  *
@@ -928,7 +832,7 @@ return $depth;
  * This function is hooked into tgmpa_init, which is fired within the
  * TGM_Plugin_Activation class constructor.
  */
-function vh_register_required_plugins() {
+function cerium_register_required_plugins() {
 
 	/**
 	 * Array of plugin arrays. Required keys are name and slug.
@@ -936,68 +840,41 @@ function vh_register_required_plugins() {
 	 */
 	$plugins = array(
 		array(
-			'name'     				=> 'Bootstrap 3 Shortcodes', // The plugin name
+			'name'     				=> esc_html__('Bootstrap 3 Shortcodes', 'cerium'), // The plugin name
 			'slug'     				=> 'bootstrap-3-shortcodes', // The plugin slug (typically the folder name)
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '3.3.6', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'version' 				=> '3.3.10', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
 		),
 		array(
-			'name'     				=> 'Contact Form 7', // The plugin name
+			'name'     				=> esc_html__('Contact Form 7', 'cerium'), // The plugin name
 			'slug'     				=> 'contact-form-7', // The plugin slug (typically the folder name)
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '4.3', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'version' 				=> '4.5', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
 		),
 		array(
-			'name'     				=> 'Easy Testimonials', // The plugin name
+			'name'     				=> esc_html__('Easy Testimonials', 'cerium'), // The plugin name
 			'slug'     				=> 'easy-testimonials', // The plugin slug (typically the folder name)
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '1.31.11', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'version' 				=> '2.0.13', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
 		),
 		array(
-			'name'     				=> 'Functionality for Cerium theme', // The plugin name
+			'name'     				=> esc_html__('Functionality for Cerium theme', 'cerium'), // The plugin name
 			'slug'     				=> 'functionality-for-cerium-theme', // The plugin slug (typically the folder name)
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '1.0', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'version' 				=> '1.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-		),
-		// array(
-		// 	'name'     				=> 'Like Dislike counter', // The plugin name
-		// 	'slug'     				=> 'like-dislike-counter-for-posts-pages-and-comments', // The plugin slug (typically the folder name)
-		// 	'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-		// 	'version' 				=> '1.3.0', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-		// 	'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-		// 	'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-		// 	'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-		// ),
-		// array(
-		// 	'name'     				=> 'Newsletter', // The plugin name
-		// 	'slug'     				=> 'newsletter', // The plugin slug (typically the folder name)
-		// 	'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-		// 	'version' 				=> '3.9.6', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-		// 	'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-		// 	'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-		// 	'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-		// ),
-		// array(
-		// 	'name'     				=> 'WP-PostViews', // The plugin name
-		// 	'slug'     				=> 'wp-postviews', // The plugin slug (typically the folder name)
-		// 	'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-		// 	'version' 				=> '1.71', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-		// 	'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-		// 	'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-		// 	'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-		// )
+		)
 	);
 
 	/**
@@ -1008,19 +885,18 @@ function vh_register_required_plugins() {
 	 * end of each line for what each argument will be.
 	 */
 	$config = array(
-		'domain'       		=> 'cerium',         	// Text domain - likely want to be the same as your theme.
+		'domain'       		=> 'cerium',        		 	// Text domain - likely want to be the same as your theme.
 		'default_path' 		=> '',                         	// Default absolute path to pre-packaged plugins
-		'parent_menu_slug' 	=> 'themes.php', 				// Default parent menu slug
-		'parent_url_slug' 	=> 'themes.php', 				// Default parent URL slug
+		'parent_slug' 		=> 'themes.php', 				// Default parent menu slug
 		'menu'         		=> 'install-required-plugins', 	// Menu slug
 		'has_notices'      	=> true,                       	// Show admin notices or not
 		'is_automatic'    	=> true,					   	// Automatically activate plugins after installation or not
 		'message' 			=> '',							// Message to output right before the plugins table
 		'strings'      		=> array(
-			'page_title'                       			=> __( 'Install Required Plugins', 'cerium' ),
-			'menu_title'                       			=> __( 'Install Plugins', 'cerium' ),
-			'installing'                       			=> __( 'Installing Plugin: %s', 'cerium' ), // %1$s = plugin name
-			'oops'                             			=> __( 'Something went wrong with the plugin API.', 'cerium' ),
+			'page_title'                       			=> esc_html__( 'Install Required Plugins', 'cerium' ),
+			'menu_title'                       			=> esc_html__( 'Install Plugins', 'cerium' ),
+			'installing'                       			=> esc_html__( 'Installing Plugin: %s', 'cerium' ), // %1$s = plugin name
+			'oops'                             			=> esc_html__( 'Something went wrong with the plugin API.', 'cerium' ),
 			'notice_can_install_required'     			=> _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.', 'cerium' ), // %1$s = plugin name(s)
 			'notice_can_install_recommended'			=> _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.', 'cerium' ), // %1$s = plugin name(s)
 			'notice_cannot_install'  					=> _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.', 'cerium' ), // %1$s = plugin name(s)
@@ -1031,72 +907,13 @@ function vh_register_required_plugins() {
 			'notice_cannot_update' 						=> _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.', 'cerium' ), // %1$s = plugin name(s)
 			'install_link' 					  			=> _n_noop( 'Begin installing plugin', 'Begin installing plugins', 'cerium' ),
 			'activate_link' 				  			=> _n_noop( 'Activate installed plugin', 'Activate installed plugins', 'cerium' ),
-			'return'                           			=> __( 'Return to Required Plugins Installer', 'cerium' ),
-			'plugin_activated'                 			=> __( 'Plugin activated successfully.', 'cerium' ),
-			'complete' 									=> __( 'All plugins installed and activated successfully. %s', 'cerium' ), // %1$s = dashboard link
+			'return'                           			=> esc_html__( 'Return to Required Plugins Installer', 'cerium' ),
+			'plugin_activated'                 			=> esc_html__( 'Plugin activated successfully.', 'cerium' ),
+			'complete' 									=> esc_html__( 'All plugins installed and activated successfully. %s', 'cerium' ), // %1$s = dashboard link
 			'nag_type'									=> 'updated' // Determines admin notice type - can only be 'updated' or 'error'
 		)
 	);
 
 	tgmpa( $plugins, $config );
 }
-add_action( 'tgmpa_register', 'vh_register_required_plugins' );
-
-function cerium_allowed_tags() {
-	global $allowedposttags;
-	$allowedposttags['script'] = array(
-		'type' => true,
-		'src' => true
-	);
-}
-add_action( 'init', 'cerium_allowed_tags' );
-
-/* Remove learnpress actions */
-remove_action( 'learn_press_content_landing_summary', 'learn_press_course_title', 10 );
-remove_action( 'learn_press_content_landing_summary', 'learn_press_course_price', 25 );
-remove_action( 'learn_press_content_landing_summary', 'learn_press_course_students', 30 );
-remove_action( 'learn_press_content_landing_summary', 'learn_press_single_course_content_lesson', 40 );
-remove_action( 'learn_press_content_landing_summary', 'learn_press_course_enroll_button', 45 );
-remove_action( 'learn_press_content_landing_summary', 'learn_press_single_course_description', 55 );
-remove_action( 'learn_press_content_landing_summary', 'learn_press_course_progress', 60 );
-remove_action( 'learn_press_content_landing_summary', 'learn_press_course_curriculum', 65 );
-
-remove_action( 'learn_press_content_learning_summary', 'learn_press_course_status', 15 );
-remove_action( 'learn_press_content_learning_summary', 'learn_press_course_instructor', 20 );
-remove_action( 'learn_press_content_learning_summary', 'learn_press_course_students', 25 );
-remove_action( 'learn_press_content_learning_summary', 'learn_press_single_course_description', 35 );
-remove_action( 'learn_press_content_learning_summary', 'learn_press_single_course_content_lesson', 40 );
-remove_action( 'learn_press_content_learning_summary', 'learn_press_course_progress', 45 );
-remove_action( 'learn_press_content_learning_summary', 'learn_press_course_finish_button', 50 );
-remove_action( 'learn_press_content_learning_summary', 'learn_press_course_curriculum', 55 );
-
-// /* Add learnpress actions */
-add_action( 'learn_press_content_landing_summary', 'learn_press_course_title', 4 );
-add_action( 'learn_press_content_landing_summary', 'cerium_course_meta', 4 );
-
-add_action( 'learn_press_content_learning_summary', 'learn_press_course_title', 4 );
-add_action( 'learn_press_content_learning_summary', 'cerium_course_meta', 4 );
-
-function cerium_course_meta() {
-	learn_press_get_template( 'single-course/meta.php' );
-}
-
-function cerium_get_info( $course_id ) {
-	$cirriculum = get_post_meta($course_id, '_lp_curriculum', true);
-	$lessons = 0;
-	$quizzes = 0;
-	
-	if ( !empty($cirriculum) ) {
-		foreach ($cirriculum as $cir_value) {
-			foreach ($cir_value['items'] as $cir_values) {
-				if ( $cir_values['post_type'] == 'lp_lesson' && $cir_values['item_id'] != '' ) {
-					$lessons++;
-				} elseif ( $cir_values['post_type'] == 'lp_quiz' && $cir_values['item_id'] != '' ) {
-					$quizzes++;
-				}
-			}
-		}
-	}
-
-	return array('lessons' => $lessons, 'quizzes' => $quizzes );
-}
+add_action( 'tgmpa_register', 'cerium_register_required_plugins' );

@@ -21,7 +21,7 @@ get_header();
 global $cerium_site_width;
 ?>
 
-	<section id="primary" class="content-area <?php echo $cerium_site_width; ?>">
+	<section id="primary" class="content-area <?php echo esc_attr($cerium_site_width); ?>">
 		<div id="content" class="site-content" role="main">
 
 			<?php if ( have_posts() ) : ?>
@@ -30,28 +30,28 @@ global $cerium_site_width;
 				<h1 class="archive-title">
 					<?php
 						if ( is_tax( 'post_format', 'post-format-aside' ) ) :
-							_e( 'Asides', 'cerium' );
+							esc_html_e( 'Asides', 'cerium' );
 
 						elseif ( is_tax( 'post_format', 'post-format-image' ) ) :
-							_e( 'Images', 'cerium' );
+							esc_html_e( 'Images', 'cerium' );
 
 						elseif ( is_tax( 'post_format', 'post-format-video' ) ) :
-							_e( 'Videos', 'cerium' );
+							esc_html_e( 'Videos', 'cerium' );
 
 						elseif ( is_tax( 'post_format', 'post-format-audio' ) ) :
-							_e( 'Audio', 'cerium' );
+							esc_html_e( 'Audio', 'cerium' );
 
 						elseif ( is_tax( 'post_format', 'post-format-quote' ) ) :
-							_e( 'Quotes', 'cerium' );
+							esc_html_e( 'Quotes', 'cerium' );
 
 						elseif ( is_tax( 'post_format', 'post-format-link' ) ) :
-							_e( 'Links', 'cerium' );
+							esc_html_e( 'Links', 'cerium' );
 
 						elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) :
-							_e( 'Galleries', 'cerium' );
+							esc_html_e( 'Galleries', 'cerium' );
 
 						else :
-							_e( 'Archives', 'cerium' );
+							esc_html_e( 'Archives', 'cerium' );
 
 						endif;
 					?>

@@ -1,4 +1,9 @@
 Cerium changelog
 
-= Version 1.0 =
+= Version 1.3 =
+* Fixed some text domain related issues
+* Escaped some data
+* Removed/moved some functions to plugin
+
+= Version 1.2 =
 * Initial release

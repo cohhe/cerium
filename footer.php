@@ -17,7 +17,7 @@
 			$show_scroll_to_top = get_theme_mod('cerium_scrolltotop', false);
 
 			if ( $show_scroll_to_top ) { ?>
-				<a class="scroll-to-top" href="#"><?php _e( 'Up', 'cerium' ); ?></a>
+				<a class="scroll-to-top" href="#"><?php esc_html_e( 'Up', 'cerium' ); ?></a>
 			<?php } ?>
 			<div class="site-footer-container">
 				<footer id="colophon" class="site-footer" role="contentinfo">
@@ -26,7 +26,7 @@
 			</div>
 			<div class="footer-bottom">
 				<div class="footer-bottom-inner">
-					<div class="copyright">&copy; 2016 <a href="https://cohhe.com" target="_blank">Cohhe Themes</a>. All rights reserved.</div>
+					<div class="copyright">&copy; 2016 <a href="https://cohhe.com" target="_blank">Cohhe Themes</a>. <?php esc_html_e( 'All rights reserved.', 'cerium' ); ?></div>
 					<div class="clearfix"></div>
 				</div>
 			</div>

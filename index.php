@@ -20,11 +20,11 @@ global $cerium_site_width;
 ?>
 
 <div id="main-content" class="main-content row">
-	<div id="primary" class="content-area <?php echo $cerium_site_width; ?>">
+	<div id="primary" class="content-area <?php echo esc_attr($cerium_site_width); ?>">
 		<?php if ( !is_front_page() ) {
 			echo '<header class="entry-header">';
 			echo '<h1 class="entry-title">' . get_the_title($GLOBALS['wp_query']->queried_object->ID) . '</h1>';
-			echo '<div class="breadcrumb"><a href="'.home_url( '/' ).'">'.__('Home', 'cerium').'</a><span class="delimiter">/</span><a href="'.get_permalink($GLOBALS['wp_query']->queried_object->ID).'">'.get_the_title($GLOBALS['wp_query']->queried_object->ID).'</a></div>';
+			echo '<div class="breadcrumb"><a href="'.home_url( '/' ).'">'.esc_html__('Home', 'cerium').'</a><span class="delimiter">/</span><a href="'.get_permalink($GLOBALS['wp_query']->queried_object->ID).'">'.get_the_title($GLOBALS['wp_query']->queried_object->ID).'</a></div>';
 			echo '</header><!-- .entry-header -->';
 		} ?>
 		<div id="content" class="site-content" role="main">

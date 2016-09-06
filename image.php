@@ -31,7 +31,7 @@ get_header();
 						<span class="full-size-link"><a href="<?php echo wp_get_attachment_url(); ?>"><?php echo $metadata['width']; ?> &times; <?php echo $metadata['height']; ?></a></span>
 
 						<span class="parent-post-link"><a href="<?php echo get_permalink( $post->post_parent ); ?>" rel="gallery"><?php echo get_the_title( $post->post_parent ); ?></a></span>
-						<?php edit_post_link( __( 'Edit', 'cerium' ), '<span class="edit-link">', '</span>' ); ?>
+						<?php edit_post_link( esc_html__( 'Edit', 'cerium' ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .entry-meta -->
 				</header><!-- .entry-header -->
 
@@ -53,7 +53,7 @@ get_header();
 					</div>
 					<?php
 						wp_link_pages( array(
-							'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'cerium' ) . '</span>',
+							'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pages:', 'cerium' ) . '</span>',
 							'after'       => '<div class="clearfix"></div></div>',
 							'link_before' => '<span>',
 							'link_after'  => '</span>',
@@ -64,8 +64,8 @@ get_header();
 
 			<nav id="image-navigation" class="navigation image-navigation">
 				<div class="nav-links">
-				<?php previous_image_link( false, '<div class="previous-image">' . __( 'Previous Image', 'cerium' ) . '</div>' ); ?>
-				<?php next_image_link( false, '<div class="next-image">' . __( 'Next Image', 'cerium' ) . '</div>' ); ?>
+				<?php previous_image_link( false, '<div class="previous-image">' . esc_html__( 'Previous Image', 'cerium' ) . '</div>' ); ?>
+				<?php next_image_link( false, '<div class="next-image">' . esc_html__( 'Next Image', 'cerium' ) . '</div>' ); ?>
 				</div><!-- .nav-links -->
 			</nav><!-- #image-navigation -->
 

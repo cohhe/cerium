@@ -22,7 +22,7 @@ get_header();
 global $cerium_site_width;
 ?>
 <div id="main-content" class="main-content row">
-	<section id="primary" class="content-area <?php echo $cerium_site_width; ?>">
+	<section id="primary" class="content-area <?php echo esc_attr($cerium_site_width); ?>">
 		<div id="content" class="site-content" role="main">
 
 			<?php if ( have_posts() ) : ?>
@@ -31,16 +31,16 @@ global $cerium_site_width;
 				<h1 class="page-title">
 					<?php
 						if ( is_day() ) :
-							printf( __( 'Daily Archives: <span>%s</span>', 'cerium' ), get_the_date() );
+							printf( esc_html__( 'Daily Archives: <span>%s</span>', 'cerium' ), get_the_date() );
 
 						elseif ( is_month() ) :
-							printf( __( 'Monthly Archives: <span>%s</span>', 'cerium' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'cerium' ) ) );
+							printf( esc_html__( 'Monthly Archives: <span>%s</span>', 'cerium' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'cerium' ) ) );
 
 						elseif ( is_year() ) :
-							printf( __( 'Yearly Archives: <span>%s</span>', 'cerium' ), get_the_date( _x( 'Y', 'yearly archives date format', 'cerium' ) ) );
+							printf( esc_html__( 'Yearly Archives: <span>%s</span>', 'cerium' ), get_the_date( _x( 'Y', 'yearly archives date format', 'cerium' ) ) );
 
 						else :
-							_e( 'Archives', 'cerium' );
+							esc_html_e( 'Archives', 'cerium' );
 
 						endif;
 					?>

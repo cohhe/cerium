@@ -21,7 +21,6 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
-	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<!--[if lt IE 9]>
@@ -85,7 +84,7 @@ if ( ( is_active_sidebar( 'cerium-sidebar-1' ) || is_active_sidebar( 'cerium-sid
 				<div class="site-title">
 					<?php
 					if ( ! empty ( $logo ) ) { ?>
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><img src="<?php echo $logo; ?>" alt="<?php _e("Logo", "cerium"); ?>"></a>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><img src="<?php echo esc_url($logo); ?>" alt="<?php esc_html_e("Logo", "cerium"); ?>"></a>
 						<?php
 					} else { ?>
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="site-title"><?php bloginfo( 'name' ); ?></a>
@@ -97,7 +96,7 @@ if ( ( is_active_sidebar( 'cerium-sidebar-1' ) || is_active_sidebar( 'cerium-sid
 		</div>
 		<div class="clearfix"></div>
 		<div class="header-right-side">
-			<h2><?php _e('Menu', 'cerium'); ?></h2>
+			<h2><?php esc_html_e('Menu', 'cerium'); ?></h2>
 			<span class="main-menu-close icon-cancel"></span>
 			<div class="clearfix"></div>
 			<nav id="primary-navigation" class="site-navigation primary-navigation navbar-collapse collapse" role="navigation">

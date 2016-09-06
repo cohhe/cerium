@@ -15,7 +15,7 @@
 		</div>
 		<?php
 			wp_link_pages( array(
-				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'cerium' ) . '</span>',
+				'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pages:', 'cerium' ) . '</span>',
 				'after'       => '<div class="clearfix"></div></div>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',

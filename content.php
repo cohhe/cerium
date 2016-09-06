@@ -23,13 +23,13 @@ $tc = wp_count_comments( get_the_ID() );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class($cerium_article_width.$post_class); ?>>
-	<header class="entry-header <?php echo $header_class; ?>">
+	<header class="entry-header <?php echo esc_attr($header_class); ?>">
 		<?php
 			if ( !is_single() && ( is_home() || is_archive() || is_search() ) ) {
 				$img = wp_get_attachment_image_src( get_post_thumbnail_id(), 'cerium-medium-thumbnail' );
 				$image_background = '';
 				if ( !empty($img['0']) ) {
-					$image_background = ' style="background: url('.$img['0'].') no-repeat;"';
+					$image_background = ' style="background: url('.esc_url($img['0']).') no-repeat;"';
 				}
 				echo '
 				<div class="single-image-container"'.$image_background.'></div>';
@@ -39,7 +39,7 @@ $tc = wp_count_comments( get_the_ID() );
 				$img = wp_get_attachment_image_src( get_post_thumbnail_id(), 'cerium-full-width' );
 				echo '<div class="single-post-image-container">';
 				if ( !empty($img) ) {
-					echo '<img src="'.$img['0'].'" class="single-post-image" alt="'.__('Post with image', 'cerium').'">';
+					echo '<img src="'.esc_url($img['0']).'" class="single-post-image" alt="'.esc_html__('Post with image', 'cerium').'">';
 				}
 				echo '<div class="single-post-meta">';
 					cerium_posted_on();
@@ -64,7 +64,7 @@ $tc = wp_count_comments( get_the_ID() );
 	<div class="post-side-content">
 		<?php the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); ?>
 		<div class="article-lower-meta">
-			<?php echo __('By', 'cerium') . ' <a href="'.get_author_posts_url(get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' )).'" class="bussines-latest-news-author-name">'.get_the_author_meta( 'display_name' ).'</a> | ' . $tc->approved . ' ' . __('comments', 'cerium') . '</div>'; ?>
+			<?php echo esc_html__('By', 'cerium') . ' <a href="'.get_author_posts_url(get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' )).'" class="bussines-latest-news-author-name">'.get_the_author_meta( 'display_name' ).'</a> | ' . $tc->approved . ' ' . esc_html__('comments', 'cerium') . '</div>'; ?>
 		<div class="entry-summary">
 			<?php the_excerpt(); ?>
 		</div><!-- .entry-summary -->
@@ -73,11 +73,11 @@ $tc = wp_count_comments( get_the_ID() );
 	<?php else : ?>
 	<div class="entry-content">
 		<div id="entry-content-wrapper">
-			<?php the_content( __( 'Continue reading', 'cerium' ).' '.'<span class="meta-nav">&rarr;</span>' ); ?>
+			<?php the_content( esc_html__( 'Continue reading', 'cerium' ).' '.'<span class="meta-nav">&rarr;</span>' ); ?>
 			<div class="single-post-bottom-meta">
 			<?php
 				cerium_tag_list();
-				cerium_share_icons();
+				if ( function_exists('cerium_share_icons') ) { cerium_share_icons() };
 			?>
 				<div class="clearfix"></div>
 			</div>
@@ -87,7 +87,7 @@ $tc = wp_count_comments( get_the_ID() );
 		</div>
 		<?php
 			wp_link_pages( array(
-				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'cerium' ) . '</span>',
+				'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pages:', 'cerium' ) . '</span>',
 				'after'       => '<div class="clearfix"></div></div>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',

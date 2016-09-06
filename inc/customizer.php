@@ -34,31 +34,31 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_panel( 'cerium_general_panel', array(
 		'priority'       => 250,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'General settings' , 'cerium'),
-		'description'    => __( 'You can configure your general theme settings here' , 'cerium')
+		'title'          => esc_html__( 'General settings' , 'cerium'),
+		'description'    => esc_html__( 'You can configure your general theme settings here' , 'cerium')
 	) );
 
 	// Add Header setting panel and configure settings inside it
 	$wp_customize->add_panel( 'cerium_header_panel', array(
 		'priority'       => 250,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Header settings' , 'cerium'),
-		'description'    => __( 'You can configure your theme header settings here.' , 'cerium')
+		'title'          => esc_html__( 'Header settings' , 'cerium'),
+		'description'    => esc_html__( 'You can configure your theme header settings here.' , 'cerium')
 	) );
 
 	// Website logo
 	$wp_customize->add_section( 'cerium_general_logo', array(
 		'priority'       => 10,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Website logo' , 'cerium'),
-		'description'    => __( 'Please upload your logo, recommended logo size should be between 262x80' , 'cerium'),
+		'title'          => esc_html__( 'Website logo' , 'cerium'),
+		'description'    => esc_html__( 'Please upload your logo, recommended logo size should be between 262x80' , 'cerium'),
 		'panel'          => 'cerium_general_panel'
 	) );
 
 	$wp_customize->add_setting( 'cerium_logo', array( 'sanitize_callback' => 'esc_url_raw' ) );
 
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'cerium_logo', array(
-		'label'    => __( 'Website logo', 'cerium' ),
+		'label'    => esc_html__( 'Website logo', 'cerium' ),
 		'section'  => 'cerium_general_logo',
 		'settings' => 'cerium_logo',
 	) ) );
@@ -67,15 +67,15 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_general_footerlogo', array(
 		'priority'       => 10,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Website footer logo' , 'cerium'),
-		'description'    => __( 'Please upload your footer logo, recommended logo size should be between 262x80' , 'cerium'),
+		'title'          => esc_html__( 'Website footer logo' , 'cerium'),
+		'description'    => esc_html__( 'Please upload your footer logo, recommended logo size should be between 262x80' , 'cerium'),
 		'panel'          => 'cerium_general_panel'
 	) );
 
 	$wp_customize->add_setting( 'cerium_footerlogo', array( 'sanitize_callback' => 'esc_url_raw' ) );
 
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'cerium_footerlogo', array(
-		'label'    => __( 'Website footer logo', 'cerium' ),
+		'label'    => esc_html__( 'Website footer logo', 'cerium' ),
 		'section'  => 'cerium_general_footerlogo',
 		'settings' => 'cerium_footerlogo',
 	) ) );
@@ -84,8 +84,8 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_general_copyright', array(
 		'priority'       => 20,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Copyright' , 'cerium'),
-		'description'    => __( 'Please provide short copyright text which will be shown in footer.' , 'cerium'),
+		'title'          => esc_html__( 'Copyright' , 'cerium'),
+		'description'    => esc_html__( 'Please provide short copyright text which will be shown in footer.' , 'cerium'),
 		'panel'          => 'cerium_general_panel'
 	) );
 
@@ -94,7 +94,7 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'cerium_copyright',
 		array(
-			'label'      => 'Copyright',
+			'label'      => esc_html__('Copyright', 'cerium'),
 			'section'    => 'cerium_general_copyright',
 			'type'       => 'text',
 		)
@@ -104,8 +104,8 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_general_scrolltotop', array(
 		'priority'       => 30,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Scroll to top' , 'cerium'),
-		'description'    => __( 'Do you want to enable "Scroll to Top" button?' , 'cerium'),
+		'title'          => esc_html__( 'Scroll to top' , 'cerium'),
+		'description'    => esc_html__( 'Do you want to enable "Scroll to Top" button?' , 'cerium'),
 		'panel'          => 'cerium_general_panel'
 	) );
 
@@ -114,7 +114,7 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'cerium_scrolltotop',
 		array(
-			'label'      => 'Scroll to top',
+			'label'      => esc_html__('Scroll to top', 'cerium'),
 			'section'    => 'cerium_general_scrolltotop',
 			'type'       => 'checkbox',
 		)
@@ -124,15 +124,15 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_general_favicon', array(
 		'priority'       => 40,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Favicon' , 'cerium'),
-		'description'    => __( 'Do you have favicon? You can upload it here.' , 'cerium'),
+		'title'          => esc_html__( 'Favicon' , 'cerium'),
+		'description'    => esc_html__( 'Do you have favicon? You can upload it here.' , 'cerium'),
 		'panel'          => 'cerium_general_panel'
 	) );
 
 	$wp_customize->add_setting( 'cerium_favicon', array( 'sanitize_callback' => 'esc_url_raw' ) );
 
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'cerium_favicon', array(
-		'label'    => __( 'Favicon', 'cerium' ),
+		'label'    => esc_html__( 'Favicon', 'cerium' ),
 		'section'  => 'cerium_general_favicon',
 		'settings' => 'cerium_favicon',
 	) ) );
@@ -141,8 +141,8 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_general_layout', array(
 		'priority'       => 50,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Layout' , 'cerium'),
-		'description'    => __( 'Choose a layout for your theme pages. Note that a widget has to be inside widget are, or the layout won\'t change.' , 'cerium'),
+		'title'          => esc_html__( 'Layout' , 'cerium'),
+		'description'    => esc_html__( 'Choose a layout for your theme pages. Note that a widget has to be inside widget are, or the layout won\'t change.' , 'cerium'),
 		'panel'          => 'cerium_general_panel'
 	) );
 
@@ -161,8 +161,8 @@ function cerium_customize_register( $wp_customize ) {
 			'label' => 'Layout',
 			'section' => 'cerium_general_layout',
 			'choices' => array(
-				'full' => 'Full',
-				'right' => 'Right'
+				'full' => esc_html__('Full', 'cerium'),
+				'right' => esc_html__('Right', 'cerium')
 			)
 		)
 	);
@@ -171,8 +171,8 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_header_email', array(
 		'priority'       => 20,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Email' , 'cerium'),
-		'description'    => __( 'An email address for your theme header.' , 'cerium'),
+		'title'          => esc_html__( 'Email' , 'cerium'),
+		'description'    => esc_html__( 'An email address for your theme header.' , 'cerium'),
 		'panel'          => 'cerium_header_panel'
 	) );
 
@@ -181,7 +181,7 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'cerium_headeremail',
 		array(
-			'label'      => 'Email',
+			'label'      => esc_html__('Email', 'cerium'),
 			'section'    => 'cerium_header_email',
 			'type'       => 'text',
 		)
@@ -191,8 +191,8 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_header_phone', array(
 		'priority'       => 20,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Phone' , 'cerium'),
-		'description'    => __( 'An Phone number for your theme header.' , 'cerium'),
+		'title'          => esc_html__( 'Phone' , 'cerium'),
+		'description'    => esc_html__( 'An Phone number for your theme header.' , 'cerium'),
 		'panel'          => 'cerium_header_panel'
 	) );
 
@@ -201,88 +201,8 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'cerium_headerphone',
 		array(
-			'label'      => 'Phone',
+			'label'      => esc_html__('Phone', 'cerium'),
 			'section'    => 'cerium_header_phone',
-			'type'       => 'text',
-		)
-	);
-
-	// Header facebook
-	$wp_customize->add_section( 'cerium_header_facebook', array(
-		'priority'       => 20,
-		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Facebook URL' , 'cerium'),
-		'description'    => __( 'Facebook URL for your header social icon.' , 'cerium'),
-		'panel'          => 'cerium_header_panel'
-	) );
-
-	$wp_customize->add_setting( 'cerium_headerfacebook', array( 'sanitize_callback' => 'sanitize_text_field' ) );
-
-	$wp_customize->add_control(
-		'cerium_headerfacebook',
-		array(
-			'label'      => 'Facebook URL',
-			'section'    => 'cerium_header_facebook',
-			'type'       => 'text',
-		)
-	);
-
-	// Header youtube
-	$wp_customize->add_section( 'cerium_header_youtube', array(
-		'priority'       => 20,
-		'capability'     => 'edit_theme_options',
-		'title'          => __( 'YouTube URL' , 'cerium'),
-		'description'    => __( 'YouTube URL for your header social icon.' , 'cerium'),
-		'panel'          => 'cerium_header_panel'
-	) );
-
-	$wp_customize->add_setting( 'cerium_headeryoutube', array( 'sanitize_callback' => 'sanitize_text_field' ) );
-
-	$wp_customize->add_control(
-		'cerium_headeryoutube',
-		array(
-			'label'      => 'YouTube URL',
-			'section'    => 'cerium_header_youtube',
-			'type'       => 'text',
-		)
-	);
-
-	// Header twitter
-	$wp_customize->add_section( 'cerium_header_twitter', array(
-		'priority'       => 20,
-		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Twitter URL' , 'cerium'),
-		'description'    => __( 'Twitter URL for your header social icon.' , 'cerium'),
-		'panel'          => 'cerium_header_panel'
-	) );
-
-	$wp_customize->add_setting( 'cerium_headertwitter', array( 'sanitize_callback' => 'sanitize_text_field' ) );
-
-	$wp_customize->add_control(
-		'cerium_headertwitter',
-		array(
-			'label'      => 'Twitter URL',
-			'section'    => 'cerium_header_twitter',
-			'type'       => 'text',
-		)
-	);
-
-	// Header google plus
-	$wp_customize->add_section( 'cerium_header_gplus', array(
-		'priority'       => 20,
-		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Google+ URL' , 'cerium'),
-		'description'    => __( 'Google+ URL for your header social icon.' , 'cerium'),
-		'panel'          => 'cerium_header_panel'
-	) );
-
-	$wp_customize->add_setting( 'cerium_headergplus', array( 'sanitize_callback' => 'sanitize_text_field' ) );
-
-	$wp_customize->add_control(
-		'cerium_headergplus',
-		array(
-			'label'      => 'Google+ URL',
-			'section'    => 'cerium_header_gplus',
 			'type'       => 'text',
 		)
 	);
@@ -291,8 +211,8 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'cerium_google_maps_key', array(
 		'priority'       => 20,
 		'capability'     => 'edit_theme_options',
-		'title'          => __( 'Google maps key' , 'cerium'),
-		'description'    => __( 'Google maps API key so theme can use Google maps API.' , 'cerium'),
+		'title'          => esc_html__( 'Google maps key' , 'cerium'),
+		'description'    => esc_html__( 'Google maps API key so theme can use Google maps API.' , 'cerium'),
 		'panel'          => 'cerium_header_panel'
 	) );
 
@@ -301,7 +221,7 @@ function cerium_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'cerium_gmap_key',
 		array(
-			'label'      => 'Google maps key',
+			'label'      => esc_html__('Google maps key', 'cerium'),
 			'section'    => 'cerium_google_maps_key',
 			'type'       => 'text',
 		)
