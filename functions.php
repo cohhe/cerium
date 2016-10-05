@@ -39,7 +39,7 @@ if ( ! isset( $content_width ) ) {
 /**
  * Cerium 1.0 only works in WordPress 3.6 or later.
  */
-if ( version_compare( $GLOBALS['wp_version'], '3.6', '<' ) ) {
+if ( version_compare( $GLOBALS['wp_version'], '4.3', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 }
 
@@ -120,6 +120,12 @@ if ( ! function_exists( 'cerium_setup' ) ) :
 		add_filter( 'use_default_gallery_style', '__return_false' );
 
 		add_theme_support( 'title-tag' );
+
+		add_theme_support( 'custom-logo', array(
+			'height'      => 40,
+			'width'       => 145,
+			'flex-width' => true,
+		) );
 	}
 endif; // cerium_setup
 add_action( 'after_setup_theme', 'cerium_setup' );
@@ -221,11 +227,11 @@ add_action( 'template_redirect', 'cerium_content_width' );
  *
  * @return void
  */
-function remove_more_link_scroll( $link ) {
+function cerium_remove_more_link_scroll( $link ) {
 	$link = preg_replace( '|#more-[0-9]+|', '', $link );
 	return $link;
 }
-add_filter( 'the_content_more_link', 'remove_more_link_scroll' );
+add_filter( 'the_content_more_link', 'cerium_remove_more_link_scroll' );
 
 /**
  * Getter function for Featured Content Plugin.
@@ -481,6 +487,10 @@ function cerium_scripts() {
 	}
 
 	wp_enqueue_script( 'cerium-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20131209', true );
+
+	wp_enqueue_script( 'cerium-html5shiv', get_template_directory_uri() . '/js/html5.js', array(), '', true );
+	wp_script_add_data( 'cerium-html5shiv', 'conditional', 'lt IE 9' );
+
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.js', array( 'jquery' ), '20131209', true );
 
 	wp_enqueue_style( 'animate', get_template_directory_uri() . '/css/animate.min.css', array() );
@@ -721,7 +731,7 @@ class Cerium_Header_Menu_Walker extends Walker_Nav_Menu {
 	 * @param  array $args    Additional strings.
 	 * @return void
 	 */
-	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	function cerium_start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$classes         = empty ( $item->classes ) ? array () : (array) $item->classes;
 		$has_description = '';
 
@@ -811,7 +821,7 @@ class Cerium_Header_Menu_Walker extends Walker_Nav_Menu {
 
 		// Since $output is called by reference we don't need to return anything.
 		$output .= apply_filters(
-			'walker_nav_menu_start_el'
+			'walker_nav_menu_cerium_start_el'
 		,   $item_output
 		,   $item
 		,   $depth

@@ -120,23 +120,6 @@ function cerium_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Favicon
-	$wp_customize->add_section( 'cerium_general_favicon', array(
-		'priority'       => 40,
-		'capability'     => 'edit_theme_options',
-		'title'          => esc_html__( 'Favicon' , 'cerium'),
-		'description'    => esc_html__( 'Do you have favicon? You can upload it here.' , 'cerium'),
-		'panel'          => 'cerium_general_panel'
-	) );
-
-	$wp_customize->add_setting( 'cerium_favicon', array( 'sanitize_callback' => 'esc_url_raw' ) );
-
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'cerium_favicon', array(
-		'label'    => esc_html__( 'Favicon', 'cerium' ),
-		'section'  => 'cerium_general_favicon',
-		'settings' => 'cerium_favicon',
-	) ) );
-
 	// Page layout
 	$wp_customize->add_section( 'cerium_general_layout', array(
 		'priority'       => 50,
@@ -294,10 +277,6 @@ if ( class_exists( 'WP_Customize_Section' ) && !class_exists( 'cerium_Customized
 				</style>
 				<ul class="cohhe-social-profiles">
 					<li class="documentation"><a href="http://documentation.cohhe.com/cerium" class="button button-primary button-hero" target="_blank"><?php _e( 'Documentation', 'cerium' ); ?></a></li>
-					<li class="social-twitter"><i class="twitter"></i><a href="https://twitter.com/Cohhe_Themes" target="_blank"><?php _e( 'Follow us on Twitter', 'cerium' ); ?></a></li>
-					<li class="social-facebook"><i class="facebook"></i><a href="https://www.facebook.com/cohhethemes" target="_blank"><?php _e( 'Join us on Facebook', 'cerium' ); ?></a></li>
-					<li class="social-googleplus"><i class="googleplus"></i><a href="https://plus.google.com/+Cohhe_Themes/posts" target="_blank"><?php _e( 'Join us on Google+', 'cerium' ); ?></a></li>
-					<li class="social-cohhe"><i class="cohhe_logo"></i><a href="http://cohhe.com/" target="_blank"><?php _e( 'Cohhe.com', 'cerium' ); ?></a></li>
 				</ul>
 			</li>
 			<?php

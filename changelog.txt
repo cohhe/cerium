@@ -1,5 +1,16 @@
 Cerium changelog
 
+= Version 1.4 =
+* Used wp_script_add_data  for header attributes
+* Fixed theme URL
+* Fixed blank page on activation
+* Updated license information for images
+* Fixed prefixing/escaping issues
+* Removed social links from customizer
+* Used custom logo function
+* Used default favicon functionality
+* Updated archive age
+
 = Version 1.3 =
 * Fixed some text domain related issues
 * Escaped some data

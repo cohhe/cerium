@@ -853,3 +853,7 @@ function scrollPageToTop(){
 	
 
 })();
+
+jQuery(window).load(function() {
+	jQuery('#loading-background').hide();
+});

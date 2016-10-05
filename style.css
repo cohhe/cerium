@@ -1,10 +1,10 @@
 ﻿/*
 Theme Name: Cerium
-Theme URI: https://cohhe.com/project-view/cerium/
+Theme URI: http://demo.cohhe.com/cerium/
 Author: Cohhe
 Author URI: https://cohhe.com/
 Description: Enhance your story experience, by leveraging the power of Cerium Wordpress Theme, built especially for telling great stories. It is the only free WordPress theme fully compatible with the Aesop Story Engine.
-Version: 1.3
+Version: 1.4
 License: GNU General Public License v3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: two-columns, three-columns, left-sidebar, right-sidebar, custom-background, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, sticky-post, theme-options, translation-ready
@@ -934,6 +934,10 @@ body.home .header-main {
 	font-size: 40px;
     font-weight: bold;
     color: #000;
+}
+
+.site-title.logo {
+	margin-top: -14px;
 }
 
 body.home .site-title {

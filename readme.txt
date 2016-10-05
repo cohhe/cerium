@@ -48,3 +48,5 @@ Source: http://bxslider.com/
 
 Used images in screenshot.png, licensed under CC0 Public Domain, free for commercial use / no attribution required
 https://pixabay.com/en/working-business-women-female-work-1219889/
+https://pixabay.com/en/computer-summary-chart-business-767776/
+https://pixabay.com/en/calculator-paperclip-pen-office-178127/

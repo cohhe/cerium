@@ -9,33 +9,12 @@
  * @since Cerium 1.0
  */
 ?><!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8) ]><!-->
 <html <?php language_attributes(); ?>>
-<!--<![endif]-->
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<!--[if lt IE 9]>
-	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
-	<![endif]-->
-	<?php
-		$favicon = get_theme_mod('cerium_favicon', array());
-
-		if (!empty($favicon)) {
-			echo '<link rel="shortcut icon" href="' . esc_url( $favicon ) . '" />';
-		} else {
-			echo '<link rel="shortcut icon" href="' . get_template_directory_uri() . '/images/favicon.png" />';
-		}
-	?>
-	
 	<?php wp_head(); ?>
 </head>
 <?php
@@ -71,6 +50,11 @@ if ( ( is_active_sidebar( 'cerium-sidebar-1' ) || is_active_sidebar( 'cerium-sid
 	$cerium_site_width = 'col-sm-8 col-md-8 col-lg-8';
 }
 
+$site_logo = '';
+if ( function_exists('get_custom_logo') ) {
+	$site_logo = get_custom_logo();
+}
+
 ?>
 <body <?php body_class(); ?>>
 <?php do_action('ase_theme_body_inside_top'); ?>
@@ -81,11 +65,11 @@ if ( ( is_active_sidebar( 'cerium-sidebar-1' ) || is_active_sidebar( 'cerium-sid
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-content">
 			<div class="header-main">
-				<div class="site-title">
+				<div class="site-title <?php echo ($site_logo!=''?'logo':''); ?>">
 					<?php
-					if ( ! empty ( $logo ) ) { ?>
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><img src="<?php echo esc_url($logo); ?>" alt="<?php esc_html_e("Logo", "cerium"); ?>"></a>
+					if ( $site_logo != '' ) { ?>
 						<?php
+						the_custom_logo();
 					} else { ?>
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="site-title"><?php bloginfo( 'name' ); ?></a>
 						<?php

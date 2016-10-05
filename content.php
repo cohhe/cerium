@@ -77,7 +77,7 @@ $tc = wp_count_comments( get_the_ID() );
 			<div class="single-post-bottom-meta">
 			<?php
 				cerium_tag_list();
-				if ( function_exists('cerium_share_icons') ) { cerium_share_icons() };
+				if ( function_exists('cerium_share_icons') ) { cerium_share_icons(); };
 			?>
 				<div class="clearfix"></div>
 			</div>
